@@ -4,12 +4,12 @@ import 'home.dart';
 
 void main() {
   // 1
-  runApp(Yummy());
+  runApp(const Yummy());
 }
 
 class Yummy extends StatefulWidget {
 
-  Yummy({super.key});
+  const Yummy({super.key});
 
   @override
   State<Yummy> createState() => _YummyState();
