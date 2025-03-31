@@ -33,19 +33,19 @@ class _HomeState extends State<Home> {
 
   List<NavigationDestination> appBarDestinations = const [
     NavigationDestination(
-      icon: Icon(Icons.credit_card),
+      icon: Icon(Icons.category_rounded),
       label: 'Category',
-      selectedIcon: Icon(Icons.credit_card),
+      selectedIcon: Icon(Icons.category_rounded),
     ),
     NavigationDestination(
-      icon: Icon(Icons.credit_card),
+      icon: Icon(Icons.post_add_rounded),
       label: 'Post',
-      selectedIcon: Icon(Icons.credit_card),
+      selectedIcon: Icon(Icons.post_add_rounded),
     ),
     NavigationDestination(
-      icon : Icon(Icons.credit_card),
+      icon : Icon(Icons.restaurant_rounded),
       label: 'Restaurant',
-      selectedIcon: Icon(Icons.credit_card),
+      selectedIcon: Icon(Icons.restaurant_rounded),
     ),
   ];
 
@@ -54,34 +54,87 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final pages = [
       // 1
-      Center(
-        // 2
+      SingleChildScrollView(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 300),
-          // 3
-          child: CategoryCard(category: categories[0]),
+          constraints: BoxConstraints(
+            minHeight:
+              MediaQuery.of(context)
+              .size.height - kToolbarHeight - kBottomNavigationBarHeight,
+          ),
+          child: Column(
+            children: categories.map((category) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 300),
+                  child: CategoryCard(category: category),
+                ),
+              ),
+            )).toList(),
+          ),
         ),
       ),
+      // Center(
+      //   // 2
+      //   child: ConstrainedBox(
+      //     constraints: const BoxConstraints(maxWidth: 300),
+      //     // 3
+      //     child: CategoryCard(category: categories[0]),
+      //   ),
+      // ),
 
-      Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: PostCard(post: posts[0]),
+      SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: posts.map((post) => Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: PostCard(post: post),
+              )).toList(),
+            ),
+          ),
         ),
       ),
+      // Center(
+      //   child: Padding(
+      //     padding: const EdgeInsets.all(16.0),
+      //     child: PostCard(post: posts[0]),
+      //   ),
+      // ),
       //1
-      Center(
-        //2
+      SingleChildScrollView(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: 400
+          constraints: BoxConstraints(
+            minHeight:
+              MediaQuery.of(context)
+              .size.height - kToolbarHeight - kBottomNavigationBarHeight,
           ),
-          //3
-          child: RestaurantLandscapeCard(
-            restaurant: restaurants[0]
+          child: Column(
+            children: restaurants.map((restaurant) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 400),
+                  child: RestaurantLandscapeCard(restaurant: restaurant),
+                ),
+              ),
+            )).toList(),
           ),
         ),
-      )
+      ),
+      // Center(
+      //   //2
+      //   child: ConstrainedBox(
+      //     constraints: const BoxConstraints(
+      //       maxWidth: 400
+      //     ),
+      //     //3
+      //     child: RestaurantLandscapeCard(
+      //       restaurant: restaurants[0]
+      //     ),
+      //   ),
+      // )
     ];
     return Scaffold(
       appBar: AppBar(
